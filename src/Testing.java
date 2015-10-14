@@ -76,4 +76,46 @@ public class Testing {
     }
 
 
+    /**
+     * Testing for bug #2
+     *
+     */
+
+
+    /**
+     * Testing for bug 3
+     *
+     */
+
+    //first of all, lets get the win/loss ratio
+    @Test
+    public void testWinLossRatio(){
+        int wins = 0;
+        int losses = 0;
+
+        realDie1 = new Dice();
+        realDie2 = new Dice();
+        realDie3 = new Dice();
+
+        game = new Game(realDie1, realDie2, realDie3);
+
+        when (mockPlayer.getBalance()).thenReturn(100);
+
+        int currentGameWins = 0;
+
+        for (int i = 0; i < 1000; i++) {
+            currentGameWins = game.playRound(mockPlayer, DiceValue.ANCHOR, 10);
+
+            if (currentGameWins == 0) {
+                losses += 10;
+            } else {
+                wins += currentGameWins;
+            }
+
+            currentGameWins = 0;
+        }
+        System.out.println("Wins = " + wins + " Losses = " + losses);
+        float ratio = wins/losses;
+        System.out.println("Win ratio = " + ratio);
+    }
 }
