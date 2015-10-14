@@ -90,8 +90,8 @@ public class Testing {
     //first of all, lets get the win/loss ratio
     @Test
     public void testWinLossRatio(){
-        int wins = 0;
-        int losses = 0;
+        float wins = 0;
+        float losses = 0;
 
         realDie1 = new Dice();
         realDie2 = new Dice();
@@ -103,19 +103,18 @@ public class Testing {
 
         int currentGameWins = 0;
 
-        for (int i = 0; i < 1000; i++) {
+      for (int i = 0; i < 10000; i++) {
             currentGameWins = game.playRound(mockPlayer, DiceValue.ANCHOR, 10);
 
             if (currentGameWins == 0) {
-                losses += 10;
+                losses ++;
             } else {
-                wins += currentGameWins;
+                wins ++;
             }
 
-            currentGameWins = 0;
-        }
+      }
         System.out.println("Wins = " + wins + " Losses = " + losses);
-        float ratio = wins/losses;
+        float ratio = wins/(losses + wins);
         System.out.println("Win ratio = " + ratio);
     }
 }

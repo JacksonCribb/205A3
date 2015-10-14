@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 
@@ -30,11 +31,12 @@ public class Game {
 		if (bet < 0) throw new IllegalArgumentException("Bet cannot be negative."); //TODO: this allows for bets to be zero
 		
 		player.takeBet(bet);
-		    
+
+
 		int matches = 0;
 		for ( Dice d : dice) {
 			d.roll();
-			if (d.getValue().equals(pick)) { 
+			if (d.getValue().equals(pick)) {
 				matches += 1;
 			}
 		}
