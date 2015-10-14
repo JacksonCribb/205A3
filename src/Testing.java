@@ -102,8 +102,6 @@ public class Testing {
      * Testing for bug 3
      *
      */
-
-    //first of all, lets get the win/loss ratio
     @Test
     public void testWinLossRatio(){
         float wins = 0;
@@ -133,4 +131,50 @@ public class Testing {
         float ratio = wins/(losses + wins);
         System.out.println("Win ratio = " + ratio);
     }
+
+    //checking the fact 0 is acceptable for a bet is OK
+    @Test
+    public void test0(){
+        when (mockDie1.getValue()).thenReturn(DiceValue.CLUB);
+        when (mockDie2.getValue()).thenReturn(DiceValue.ANCHOR);
+        when (mockDie3.getValue()).thenReturn(DiceValue.ANCHOR);
+
+        //player to test on
+        realPlayer = new Player("Bruce", 100);
+
+        //game to test on
+        game = new Game(mockDie1, mockDie2, mockDie3);
+        game.playRound(realPlayer,DiceValue.ANCHOR,0);
+
+        System.out.println("players Balance = " + realPlayer.getBalance());
+        Assert.assertTrue(realPlayer.getBalance() == 100);
+
+        //Confirmed nothing bad happens, works as normal without issue, better left alone...
+    }
+
+        //check if unused "balanceExceeds limit function should be used
+    @Test
+    public void checkBalanceLimitChecking(){
+        when (mockDie1.getValue()).thenReturn(DiceValue.CLUB);
+        when (mockDie2.getValue()).thenReturn(DiceValue.ANCHOR);
+        when (mockDie3.getValue()).thenReturn(DiceValue.CLUB);
+
+        game = new Game(mockDie1, mockDie2, mockDie3);
+
+        realPlayer = new Player("Bort", 20);
+        realPlayer.setLimit(10);
+        game.playRound(realPlayer,DiceValue.CROWN,40);
+        Assert.assertTrue(realPlayer.getBalance() == 20);
+
+    }
+
+        //confirm all string related fnctions are correct
+    @Test
+    public void verifyStringFunctions(){
+        realDie1 = new Dice();
+        realPlayer = new Player("aaa",100);
+        System.out.println(realPlayer.toString()); //All good
+        System.out.println(realDie1.toString()); //all good
+    }
+
 }
