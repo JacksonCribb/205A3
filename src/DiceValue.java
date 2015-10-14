@@ -23,8 +23,12 @@ public enum DiceValue {
 	}
 
 	public static DiceValue getRandom() {
-		int random = RANDOM.nextInt(DiceValue.SPADE.ordinal());
+		int random = RANDOM.nextInt(DiceValue.SPADE.ordinal() + 1);
+		if (random == 7){random = 6;} //just to be sure it never rolls a 7, damn near impossible for it to happen though(is it even possible?)
+
+		//System.out.print(random);
 		//System.out.println(values()[random]);
+
 		return values()[random];
 	}
 	
