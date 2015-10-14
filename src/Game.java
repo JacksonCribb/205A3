@@ -27,7 +27,7 @@ public class Game {
 	
 	public int playRound(Player player, DiceValue pick, int bet ) {		
 		if (player == null) throw new IllegalArgumentException("Player cannot be null.");
-		if (pick == null) throw new IllegalArgumentException("Pick cannot be null.");
+		if (pick == null) throw new IllegalArgumentException("Pick cannot be null."); //changed this text to read null instead of positive, more accurate
 		if (bet < 0) throw new IllegalArgumentException("Bet cannot be negative.");
 		
 		player.takeBet(bet);
