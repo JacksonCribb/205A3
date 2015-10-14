@@ -81,6 +81,22 @@ public class Testing {
      *
      */
 
+    @Test
+    public void testBettingLimit(){
+        when (mockDie1.getValue()).thenReturn(DiceValue.CLUB);
+        when (mockDie2.getValue()).thenReturn(DiceValue.ANCHOR);
+        when (mockDie3.getValue()).thenReturn(DiceValue.CLUB);
+
+        game = new Game(mockDie1, mockDie2, mockDie3);
+
+        realPlayer = new Player("Bort", 20);
+        realPlayer.setLimit(10);
+
+        game.playRound(realPlayer,DiceValue.CROWN,10);
+
+        Assert.assertTrue(realPlayer.getBalance() == 10);
+
+    }
 
     /**
      * Testing for bug 3
